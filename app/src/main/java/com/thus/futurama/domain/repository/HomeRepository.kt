@@ -1,4 +1,4 @@
-package com.thus.futurama.data.domain.repository
+package com.thus.futurama.domain.repository
 
 import com.thus.futurama.data.model.HomeScreenResponse
 

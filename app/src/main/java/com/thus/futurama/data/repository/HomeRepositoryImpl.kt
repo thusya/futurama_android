@@ -1,6 +1,6 @@
 package com.thus.futurama.data.repository
 
-import com.thus.futurama.data.domain.repository.HomeRepository
+import com.thus.futurama.domain.repository.HomeRepository
 import com.thus.futurama.data.model.HomeScreenResponse
 import com.thus.futurama.data.network.ApiService
 
