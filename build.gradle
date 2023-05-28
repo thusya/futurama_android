@@ -1,4 +1,18 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        compose_ui_version = '1.4.3'
+        androidx_version = "1.10.1"
+        navigation_version = "2.5.3"
+        appcompat_version = "1.6.1"
+        material_version = "1.9.0"
+        lifecycle_version = "2.6.1"
+        koin_version = "3.0.1"
+        koin_android_version = "3.3.3"
+        retrofit_version = "2.9.0"
+        junit5_version = "5.9.2"
+    }
+}
 plugins {
     id 'com.android.application' version '8.0.2' apply false
     id 'com.android.library' version '8.0.2' apply false
