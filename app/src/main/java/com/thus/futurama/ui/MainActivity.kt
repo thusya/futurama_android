@@ -40,7 +40,10 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable(NavigationScreen.CHARACTER_DETAILS_SCREEN.name) {
-                        DetailsScreen(charactersViewModel = characterViewModel)
+                        DetailsScreen(
+                            charactersViewModel = characterViewModel,
+                            navController = navController
+                        )
                     }
                 }
             }

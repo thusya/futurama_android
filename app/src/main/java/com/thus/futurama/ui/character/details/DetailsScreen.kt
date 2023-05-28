@@ -7,50 +7,75 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.thus.futurama.R
 import com.thus.futurama.ui.character.CharacterViewModel
 
 @Composable
-fun DetailsScreen(charactersViewModel: CharacterViewModel) {
-    charactersViewModel.characterSelected?.let { character ->
-        Column(modifier = Modifier.padding(16.dp)) {
-            Image(
-                painter = rememberAsyncImagePainter(model = character.images.main),
-                contentDescription = character.name.first,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = character.name.first ?: "",
-                style = MaterialTheme.typography.h6
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Gender: ${character.gender ?: ""}")
-            Text(text = "Species: ${character.species ?: ""}")
-            Text(text = "Home Planet: ${character.homePlanet ?: ""}")
-            Text(text = "Occupation: ${character.occupation ?: ""}")
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "Sayings",
-                style = MaterialTheme.typography.subtitle1,
-                fontWeight = FontWeight.Bold
-            )
-            character.sayings?.forEach { saying ->
-                Text(text = "- $saying")
-            }
-        }
+fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavController) {
 
+    charactersViewModel.characterSelected?.let { character ->
+        Scaffold(
+            topBar = {
+                TopAppBar(title = {
+                    Text(
+                        text = stringResource(id = R.string.screen_name_character_detail),
+                        style = MaterialTheme.typography.h6
+                    )
+                }, navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Filled.ArrowBack, "Back icon")
+                    }
+                })
+            }
+        ) { _ ->
+            Column(modifier = Modifier.padding(16.dp)) {
+                Image(
+                    painter = rememberAsyncImagePainter(model = character.images.main),
+                    contentDescription = character.name.first,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .clip(RoundedCornerShape(8.dp)),
+                    contentScale = ContentScale.Crop
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = character.name.first ?: "",
+                    style = MaterialTheme.typography.h6
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = "Gender: ${character.gender ?: ""}")
+                Text(text = "Species: ${character.species ?: ""}")
+                Text(text = "Home Planet: ${character.homePlanet ?: ""}")
+                Text(text = "Occupation: ${character.occupation ?: ""}")
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Sayings",
+                    style = MaterialTheme.typography.subtitle1,
+                    fontWeight = FontWeight.Bold
+                )
+                character.sayings?.forEach { saying ->
+                    Text(text = "- $saying")
+                }
+            }
+
+        }
     }
 }

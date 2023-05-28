@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,57 +30,66 @@ fun HomeScreenNormal(
     onCharactersClicked: () -> Unit,
     onQuizClicked: () -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = stringResource(id = R.string.text_synopsis),
-            style = MaterialTheme.typography.h6
-        )
-        Text(
-            text = homeScreenResponse.synopsis.orEmpty(),
-            style = MaterialTheme.typography.body2
-        )
-
-        Spacer(modifier = Modifier.padding(16.dp))
-
-        Text(
-            text = stringResource(id = R.string.text_years_aired),
-            style = MaterialTheme.typography.h6
-        )
-
-        Text(
-            text = homeScreenResponse.yearsAired.orEmpty(),
-            style = MaterialTheme.typography.body2
-        )
-
-        Spacer(modifier = Modifier.padding(16.dp))
-
-        Text(
-            text = stringResource(id = R.string.text_characters),
-            style = MaterialTheme.typography.h6
-        )
-        homeScreenResponse.creators?.forEach { creater ->
+    Scaffold(topBar = {
+        TopAppBar {
             Text(
-                text = creater.name.orEmpty(),
-                style = MaterialTheme.typography.body1
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.h6
             )
         }
+    }) { _ ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.text_synopsis),
+                style = MaterialTheme.typography.h6
+            )
+            Text(
+                text = homeScreenResponse.synopsis.orEmpty(),
+                style = MaterialTheme.typography.body2
+            )
 
-        Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(16.dp))
 
-        Button(onClick = onCharactersClicked) {
-            Text(text = stringResource(id = R.string.text_characters))
+            Text(
+                text = stringResource(id = R.string.text_years_aired),
+                style = MaterialTheme.typography.h6
+            )
+
+            Text(
+                text = homeScreenResponse.yearsAired.orEmpty(),
+                style = MaterialTheme.typography.body2
+            )
+
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            Text(
+                text = stringResource(id = R.string.text_characters),
+                style = MaterialTheme.typography.h6
+            )
+            homeScreenResponse.creators?.forEach { creater ->
+                Text(
+                    text = creater.name.orEmpty(),
+                    style = MaterialTheme.typography.body1
+                )
+            }
+
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            Button(onClick = onCharactersClicked) {
+                Text(text = stringResource(id = R.string.text_characters))
+            }
+
+            Spacer(modifier = Modifier.padding(10.dp))
+
+            Button(onClick = onQuizClicked) {
+                Text(text = stringResource(id = R.string.text_quiz))
+            }
+
         }
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Button(onClick = onQuizClicked) {
-            Text(text = stringResource(id = R.string.text_quiz))
-        }
-
     }
 }
 
