@@ -3,4 +3,9 @@
     <string name="text_no_data_available">No data available</string>
     <string name="text_an_error_occurred">An error occurred</string>
     <string name="text_retry">Retry</string>
+    <string name="text_characters">Characters</string>
+    <string name="text_quiz">Quiz</string>
+    <string name="text_years_aired">Years Aired</string>
+    <string name="text_synopsis">Synopsis</string>
+    <string name="text_creators">Creators</string>
 </resources>

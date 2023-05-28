@@ -3,7 +3,9 @@ package com.thus.futurama.di
 import com.thus.futurama.domain.repository.HomeRepository
 import com.thus.futurama.data.network.ApiService
 import com.thus.futurama.data.repository.HomeRepositoryImpl
+import com.thus.futurama.ui.home.HomeViewModel
 import okhttp3.OkHttpClient
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -18,6 +20,8 @@ val appModules = module {
             .build()
             .create(ApiService::class.java)
     }
+
+    viewModel { HomeViewModel(get()) }
 
     factory<HomeRepository> { HomeRepositoryImpl(get()) }
 }
