@@ -130,7 +130,9 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel) {
                 homeScreenResponse = state.homeResponse.first(),
                 onCharactersClicked = {
                     navController.navigate(NavigationScreen.CHARACTER_SCREEN.name)
-                }, onQuizClicked = {})
+                }, onQuizClicked = {
+                    navController.navigate(NavigationScreen.QUIZ_SCREEN.name)
+                })
         }
 
         is HomeState.Error -> {

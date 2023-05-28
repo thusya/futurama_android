@@ -12,6 +12,8 @@ import com.thus.futurama.ui.character.details.DetailsScreen
 import com.thus.futurama.ui.home.HomeScreen
 import com.thus.futurama.ui.home.HomeViewModel
 import com.thus.futurama.ui.navigation.NavigationScreen
+import com.thus.futurama.ui.quiz.QuizScreen
+import com.thus.futurama.ui.quiz.QuizViewModel
 import com.thus.futurama.ui.theme.FuturamaAppTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,6 +21,7 @@ class MainActivity : ComponentActivity() {
 
     private val homeViewModel: HomeViewModel by viewModel()
     private val characterViewModel: CharacterViewModel by viewModel()
+    private val quizViewModel: QuizViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,12 @@ class MainActivity : ComponentActivity() {
                         DetailsScreen(
                             charactersViewModel = characterViewModel,
                             navController = navController
+                        )
+                    }
+                    composable(NavigationScreen.QUIZ_SCREEN.name) {
+                        QuizScreen(
+                            navController = navController,
+                            quizViewModel = quizViewModel
                         )
                     }
                 }
