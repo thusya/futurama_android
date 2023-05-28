@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -82,12 +84,14 @@ fun QuizScreenNormal(
 ) {
     var currentQuestionIndex by remember { mutableStateOf(0) }
     var score by remember { mutableStateOf(0) }
+    val state = rememberScrollState()
 
     if (currentQuestionIndex < questions.size) {
         val question = questions[currentQuestionIndex]
 
         Column(
             modifier = Modifier
+                .verticalScroll(state)
                 .fillMaxSize()
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center,

@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -80,7 +81,7 @@ fun CharacterList(
     characters: List<CharacterResponse>,
     onItemClick: (CharacterResponse) -> Unit
 ) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(characters) { character ->
             CharacterListItem(characterResponse = character) {
                 onItemClick(character)
@@ -94,6 +95,7 @@ fun CharacterListItem(characterResponse: CharacterResponse, onItemClick: () -> U
 
     Row(
         modifier = Modifier
+            .fillMaxSize()
             .clickable(onClick = onItemClick)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
