@@ -19,6 +19,7 @@ import com.thus.futurama.data.model.HomeScreenResponse
 import com.thus.futurama.ui.commonscreens.EmptyScreen
 import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
+import com.thus.futurama.ui.navigation.NavigationScreen
 import com.thus.futurama.ui.theme.FuturamaAppTheme
 
 @Composable
@@ -114,7 +115,11 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel) {
         }
 
         is HomeState.Normal -> {
-            HomeScreenNormal(state.homeResponse.first(), {}, {})
+            HomeScreenNormal(
+                homeScreenResponse = state.homeResponse.first(),
+                onCharactersClicked = {
+                    navController.navigate(NavigationScreen.CHARACTER_SCREEN.name)
+                }, onQuizClicked = {})
         }
 
         is HomeState.Error -> {

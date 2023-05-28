@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thus.futurama.domain.repository.HomeRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -17,7 +18,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
 
     fun retry() {
         homeState.value = HomeState.Loading
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = homeRepository.getHomeScreenData()
 
