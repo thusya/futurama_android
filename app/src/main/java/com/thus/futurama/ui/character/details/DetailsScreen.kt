@@ -32,7 +32,7 @@ import com.thus.futurama.ui.character.CharacterViewModel
 @Composable
 fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavController) {
 
-    charactersViewModel.characterSelected?.let { character ->
+    charactersViewModel.characterDetailSelected?.let { character ->
         Scaffold(
             topBar = {
                 TopAppBar(title = {

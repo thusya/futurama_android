@@ -4,10 +4,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thus.futurama.domain.repository.FuturamaRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class QuizViewModel(private val futuramaRepository: FuturamaRepository) : ViewModel() {
+class QuizViewModel(
+    private val futuramaRepository: FuturamaRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
 
     val quizState = mutableStateOf<QuizState>(QuizState.Loading)
 
@@ -18,7 +22,7 @@ class QuizViewModel(private val futuramaRepository: FuturamaRepository) : ViewMo
     fun refresh() {
         quizState.value = QuizState.Loading
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             try {
                 val response = futuramaRepository.getQuiz()
 

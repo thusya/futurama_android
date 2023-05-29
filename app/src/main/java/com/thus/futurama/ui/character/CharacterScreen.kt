@@ -62,7 +62,7 @@ fun CharactersScreen(navController: NavController, viewModel: CharacterViewModel
 
             is CharactersState.Normal -> {
                 CharacterList(characterInfoList = state.characterInfoList) { character ->
-                    viewModel.characterSelected = character
+                    viewModel.characterDetailSelected = character
                     navController.navigate(NavigationScreen.CHARACTER_DETAILS_SCREEN.name)
                 }
             }

@@ -5,13 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thus.futurama.domain.model.CharacterInfo
 import com.thus.futurama.domain.repository.FuturamaRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CharacterViewModel(private val futuramaRepository: FuturamaRepository) : ViewModel() {
+class CharacterViewModel(
+    private val futuramaRepository: FuturamaRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : ViewModel() {
 
     val charactersState = mutableStateOf<CharactersState>(CharactersState.Loading)
-    var characterSelected: CharacterInfo? = null
+    var characterDetailSelected: CharacterInfo? = null
 
     init {
         refresh()
@@ -19,7 +23,7 @@ class CharacterViewModel(private val futuramaRepository: FuturamaRepository) : V
 
     fun refresh() {
         charactersState.value = CharactersState.Loading
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             try {
                 val response = futuramaRepository.getCharacters()
                 if (response.isEmpty()) {
