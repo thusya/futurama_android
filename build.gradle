@@ -11,6 +11,15 @@ buildscript {
         koin_android_version = "3.3.3"
         retrofit_version = "2.9.0"
         junit5_version = "5.9.2"
+        activity_compose = "1.7.2"
+        okhttp_logging_interceptor = "4.11.0"
+        coil_compose = "2.4.0"
+        compose_material = "1.4.3"
+        mockk_android = "1.13.4"
+        kotlinx_coroutines_test = "1.7.1"
+        espresso_version = "3.5.1"
+        test_ext_junit = "1.1.5"
+        junit_version = "4.13.2"
     }
 }
 plugins {
