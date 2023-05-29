@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavigationScreen.CHARACTER_SCREEN.name) {
                         CharactersScreen(
                             navController = navController,
-                            viewModel = characterViewModel
+                            charactersViewModel = characterViewModel
                         )
                     }
                     composable(NavigationScreen.CHARACTER_DETAILS_SCREEN.name) {

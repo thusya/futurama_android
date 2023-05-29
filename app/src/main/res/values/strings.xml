@@ -13,4 +13,10 @@
     <string name="quiz_score">Score: %d / %d</string>
     <string name="quiz_result">Result %d</string>
     <string name="quiz_restart">Restart</string>
+
+    <string name="text_sayings">Sayings</string>
+    <string name="text_gender">Gender: %s</string>
+    <string name="text_species">Species: %s</string>
+    <string name="text_home_planet">Home Planet: %s</string>
+    <string name="text_occupation">Occupation: %s</string>
 </resources>
