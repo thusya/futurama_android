@@ -27,13 +27,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.thus.futurama.R
 import com.thus.futurama.domain.model.QuestionInfo
 import com.thus.futurama.ui.commonscreens.EmptyScreen
 import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
+import com.thus.futurama.ui.theme.spacing
 
 @Composable
 fun QuizScreen(navController: NavController, quizViewModel: QuizViewModel) {
@@ -93,12 +93,12 @@ fun QuizScreenNormal(
             modifier = Modifier
                 .verticalScroll(state)
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(MaterialTheme.spacing.medium),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = question.question ?: "")
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             question.possibleAnswers.forEach { answer ->
                 AnswerButton(
                     text = answer,
@@ -110,9 +110,9 @@ fun QuizScreenNormal(
                         currentQuestionIndex++
                     }
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
             }
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
             Text(text = stringResource(R.string.quiz_score, score, questions.size))
         }
 
@@ -144,7 +144,7 @@ fun ResultScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(MaterialTheme.spacing.medium),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -152,7 +152,7 @@ fun ResultScreen(
             text = stringResource(R.string.quiz_result, score),
             style = MaterialTheme.typography.h5
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
         Button(onClick = onRestartQuiz) {
             Text(text = stringResource(R.string.quiz_restart))
         }

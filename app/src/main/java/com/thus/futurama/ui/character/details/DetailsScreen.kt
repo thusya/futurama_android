@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -28,6 +27,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.thus.futurama.R
 import com.thus.futurama.ui.character.CharacterViewModel
+import com.thus.futurama.ui.theme.spacing
 
 @Composable
 fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavController) {
@@ -50,7 +50,7 @@ fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavCon
             val state = rememberScrollState()
             Column(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(MaterialTheme.spacing.medium)
                     .verticalScroll(state = state)
             ) {
                 Image(
@@ -59,20 +59,20 @@ fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavCon
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                        .clip(RoundedCornerShape(8.dp)),
+                        .clip(MaterialTheme.shapes.medium),
                     contentScale = ContentScale.FillHeight
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 Text(
                     text = character.name.first ?: "",
                     style = MaterialTheme.typography.h6
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
                 Text(text = "Gender: ${character.gender}")
                 Text(text = "Species: ${character.species}")
                 Text(text = "Home Planet: ${character.homePlanet}")
                 Text(text = "Occupation: ${character.occupation}")
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
                 Text(
                     text = "Sayings",
                     style = MaterialTheme.typography.subtitle1,

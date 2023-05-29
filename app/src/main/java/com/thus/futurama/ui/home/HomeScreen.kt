@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.thus.futurama.R
 import com.thus.futurama.domain.model.CreatorInfo
@@ -25,6 +24,7 @@ import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
 import com.thus.futurama.ui.navigation.NavigationScreen
 import com.thus.futurama.ui.theme.FuturamaAppTheme
+import com.thus.futurama.ui.theme.spacing
 
 @Composable
 fun HomeScreenNormal(
@@ -44,7 +44,7 @@ fun HomeScreenNormal(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(MaterialTheme.spacing.medium)
                 .verticalScroll(state = state)
         ) {
             Text(
@@ -56,7 +56,7 @@ fun HomeScreenNormal(
                 style = MaterialTheme.typography.body2
             )
 
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(MaterialTheme.spacing.medium))
 
             Text(
                 text = stringResource(id = R.string.text_years_aired),
@@ -68,7 +68,7 @@ fun HomeScreenNormal(
                 style = MaterialTheme.typography.body2
             )
 
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(MaterialTheme.spacing.medium))
 
             Text(
                 text = stringResource(id = R.string.text_characters),
@@ -81,13 +81,13 @@ fun HomeScreenNormal(
                 )
             }
 
-            Spacer(modifier = Modifier.padding(16.dp))
+            Spacer(modifier = Modifier.padding(MaterialTheme.spacing.medium))
 
             Button(onClick = onCharactersClicked) {
                 Text(text = stringResource(id = R.string.text_characters))
             }
 
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(MaterialTheme.spacing.small))
 
             Button(onClick = onQuizClicked) {
                 Text(text = stringResource(id = R.string.text_quiz))

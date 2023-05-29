@@ -33,6 +33,7 @@ import com.thus.futurama.ui.commonscreens.EmptyScreen
 import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
 import com.thus.futurama.ui.navigation.NavigationScreen
+import com.thus.futurama.ui.theme.spacing
 
 @Composable
 fun CharactersScreen(navController: NavController, viewModel: CharacterViewModel) {
@@ -97,7 +98,7 @@ fun CharacterListItem(characterInfo: CharacterInfo, onItemClick: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .clickable(onClick = onItemClick)
-            .padding(16.dp),
+            .padding(MaterialTheme.spacing.medium),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
@@ -105,9 +106,9 @@ fun CharacterListItem(characterInfo: CharacterInfo, onItemClick: () -> Unit) {
             contentDescription = characterInfo.getFullName(),
             modifier = Modifier
                 .size(64.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(RoundedCornerShape(MaterialTheme.spacing.small))
         )
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(MaterialTheme.spacing.medium))
         Text(
             text = characterInfo.name.first,
             style = MaterialTheme.typography.body1
