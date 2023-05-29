@@ -69,7 +69,7 @@ fun CharactersScreen(navController: NavController, viewModel: CharacterViewModel
 
             is CharactersState.Error -> {
                 ErrorScreen {
-                    viewModel.retry()
+                    viewModel.refresh()
                 }
             }
         }

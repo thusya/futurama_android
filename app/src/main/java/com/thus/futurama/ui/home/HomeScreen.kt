@@ -141,7 +141,7 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel) {
 
         is HomeState.Error -> {
             ErrorScreen {
-                homeViewModel.retry()
+                homeViewModel.refresh()
             }
         }
     }

@@ -64,13 +64,13 @@ fun QuizScreen(navController: NavController, quizViewModel: QuizViewModel) {
             is QuizState.Normal -> {
                 QuizScreenNormal(
                     questions = state.quiz,
-                    onRestartQuiz = { quizViewModel.retry() }
+                    onRestartQuiz = { quizViewModel.refresh() }
                 )
             }
 
             is QuizState.Error -> {
                 ErrorScreen {
-                    quizViewModel.retry()
+                    quizViewModel.refresh()
                 }
             }
         }

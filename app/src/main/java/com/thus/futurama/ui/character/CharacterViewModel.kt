@@ -14,10 +14,10 @@ class CharacterViewModel(private val futuramaRepository: FuturamaRepository) : V
     var characterSelected: CharacterInfo? = null
 
     init {
-        retry()
+        refresh()
     }
 
-    fun retry() {
+    fun refresh() {
         charactersState.value = CharactersState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -28,7 +28,7 @@ class CharacterViewModel(private val futuramaRepository: FuturamaRepository) : V
                     charactersState.value = CharactersState.Normal(response)
                 }
             } catch (ex: Exception) {
-                charactersState.value = CharactersState.Error
+                charactersState.value = CharactersState.Error(ex)
             }
         }
 

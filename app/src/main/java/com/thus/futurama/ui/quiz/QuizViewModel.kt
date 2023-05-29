@@ -12,10 +12,10 @@ class QuizViewModel(private val futuramaRepository: FuturamaRepository) : ViewMo
     val quizState = mutableStateOf<QuizState>(QuizState.Loading)
 
     init {
-        retry()
+        refresh()
     }
 
-    fun retry() {
+    fun refresh() {
         quizState.value = QuizState.Loading
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,7 +28,7 @@ class QuizViewModel(private val futuramaRepository: FuturamaRepository) : ViewMo
                     quizState.value = QuizState.Normal(response)
                 }
             } catch (e: Exception) {
-                quizState.value = QuizState.Error
+                quizState.value = QuizState.Error(e)
             }
         }
     }

@@ -13,10 +13,10 @@ class HomeViewModel(private val futuramaRepository: FuturamaRepository) : ViewMo
     val homeState = mutableStateOf<HomeState>(HomeState.Loading)
 
     init {
-        retry()
+        refresh()
     }
 
-    fun retry() {
+    fun refresh() {
         homeState.value = HomeState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -28,7 +28,7 @@ class HomeViewModel(private val futuramaRepository: FuturamaRepository) : ViewMo
                     homeState.value = HomeState.Normal(response)
                 }
             } catch (e: Exception) {
-                homeState.value = HomeState.Error
+                homeState.value = HomeState.Error(e)
             }
 
         }
