@@ -55,7 +55,7 @@ fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavCon
             ) {
                 Image(
                     painter = rememberAsyncImagePainter(model = character.images.main),
-                    contentDescription = character.name.first,
+                    contentDescription = character.getFullName(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
@@ -68,17 +68,17 @@ fun DetailsScreen(charactersViewModel: CharacterViewModel, navController: NavCon
                     style = MaterialTheme.typography.h6
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Gender: ${character.gender ?: ""}")
-                Text(text = "Species: ${character.species ?: ""}")
-                Text(text = "Home Planet: ${character.homePlanet ?: ""}")
-                Text(text = "Occupation: ${character.occupation ?: ""}")
+                Text(text = "Gender: ${character.gender}")
+                Text(text = "Species: ${character.species}")
+                Text(text = "Home Planet: ${character.homePlanet}")
+                Text(text = "Occupation: ${character.occupation}")
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = "Sayings",
                     style = MaterialTheme.typography.subtitle1,
                     fontWeight = FontWeight.Bold
                 )
-                character.sayings?.forEach { saying ->
+                character.sayings.forEach { saying ->
                     Text(text = "- $saying")
                 }
             }

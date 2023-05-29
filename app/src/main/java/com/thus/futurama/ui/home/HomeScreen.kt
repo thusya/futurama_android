@@ -11,7 +11,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,8 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.thus.futurama.R
-import com.thus.futurama.data.model.CreatorResponse
-import com.thus.futurama.data.model.HomeScreenResponse
+import com.thus.futurama.domain.model.CreatorInfo
+import com.thus.futurama.domain.model.ShowInfo
 import com.thus.futurama.ui.commonscreens.EmptyScreen
 import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
@@ -29,7 +28,7 @@ import com.thus.futurama.ui.theme.FuturamaAppTheme
 
 @Composable
 fun HomeScreenNormal(
-    homeScreenResponse: HomeScreenResponse,
+    showInfo: ShowInfo,
     onCharactersClicked: () -> Unit,
     onQuizClicked: () -> Unit
 ) {
@@ -53,7 +52,7 @@ fun HomeScreenNormal(
                 style = MaterialTheme.typography.h6
             )
             Text(
-                text = homeScreenResponse.synopsis.orEmpty(),
+                text = showInfo.synopsis,
                 style = MaterialTheme.typography.body2
             )
 
@@ -65,7 +64,7 @@ fun HomeScreenNormal(
             )
 
             Text(
-                text = homeScreenResponse.yearsAired.orEmpty(),
+                text = showInfo.yearsAired,
                 style = MaterialTheme.typography.body2
             )
 
@@ -75,9 +74,9 @@ fun HomeScreenNormal(
                 text = stringResource(id = R.string.text_characters),
                 style = MaterialTheme.typography.h6
             )
-            homeScreenResponse.creators?.forEach { creater ->
+            showInfo.creators.forEach { creater ->
                 Text(
-                    text = creater.name.orEmpty(),
+                    text = creater.name,
                     style = MaterialTheme.typography.body1
                 )
             }
@@ -103,11 +102,11 @@ fun HomeScreenNormal(
 fun DefaultPreview() {
     FuturamaAppTheme {
         HomeScreenNormal(
-            HomeScreenResponse(
+            ShowInfo(
                 synopsis = "synopsis",
                 yearsAired = "yearsAired",
                 creators = listOf(
-                    CreatorResponse(
+                    CreatorInfo(
                         name = "name",
                         url = "url"
                     )
@@ -132,7 +131,7 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel) {
 
         is HomeState.Normal -> {
             HomeScreenNormal(
-                homeScreenResponse = state.homeResponse.first(),
+                showInfo = state.showInfoList.first(),
                 onCharactersClicked = {
                     navController.navigate(NavigationScreen.CHARACTER_SCREEN.name)
                 }, onQuizClicked = {

@@ -3,12 +3,12 @@ package com.thus.futurama.ui.home
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thus.futurama.domain.repository.HomeRepository
+import com.thus.futurama.domain.repository.FuturamaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel(private val futuramaRepository: FuturamaRepository) : ViewModel() {
 
     val homeState = mutableStateOf<HomeState>(HomeState.Loading)
 
@@ -20,7 +20,7 @@ class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
         homeState.value = HomeState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = homeRepository.getHomeScreenData()
+                val response = futuramaRepository.getShowInfo()
 
                 if (response.isEmpty()) {
                     homeState.value = HomeState.Empty

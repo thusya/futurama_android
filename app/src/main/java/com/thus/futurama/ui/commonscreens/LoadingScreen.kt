@@ -20,6 +20,6 @@ fun LoadingScreen(){
 
 @Preview
 @Composable
-fun preview(){
+fun Preview(){
     LoadingScreen()
 }

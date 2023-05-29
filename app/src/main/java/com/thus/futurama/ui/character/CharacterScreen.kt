@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.thus.futurama.R
-import com.thus.futurama.data.model.CharacterResponse
+import com.thus.futurama.domain.model.CharacterInfo
 import com.thus.futurama.ui.commonscreens.EmptyScreen
 import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
@@ -61,7 +61,7 @@ fun CharactersScreen(navController: NavController, viewModel: CharacterViewModel
             }
 
             is CharactersState.Normal -> {
-                CharacterList(characters = state.characterResponse) { character ->
+                CharacterList(characterInfoList = state.characterInfoList) { character ->
                     viewModel.characterSelected = character
                     navController.navigate(NavigationScreen.CHARACTER_DETAILS_SCREEN.name)
                 }
@@ -78,12 +78,12 @@ fun CharactersScreen(navController: NavController, viewModel: CharacterViewModel
 
 @Composable
 fun CharacterList(
-    characters: List<CharacterResponse>,
-    onItemClick: (CharacterResponse) -> Unit
+    characterInfoList: List<CharacterInfo>,
+    onItemClick: (CharacterInfo) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(characters) { character ->
-            CharacterListItem(characterResponse = character) {
+        items(characterInfoList) { character ->
+            CharacterListItem(characterInfo = character) {
                 onItemClick(character)
             }
         }
@@ -91,7 +91,7 @@ fun CharacterList(
 }
 
 @Composable
-fun CharacterListItem(characterResponse: CharacterResponse, onItemClick: () -> Unit) {
+fun CharacterListItem(characterInfo: CharacterInfo, onItemClick: () -> Unit) {
 
     Row(
         modifier = Modifier
@@ -101,15 +101,15 @@ fun CharacterListItem(characterResponse: CharacterResponse, onItemClick: () -> U
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            painter = rememberAsyncImagePainter(model = characterResponse.images.main),
-            contentDescription = characterResponse.name.first,
+            painter = rememberAsyncImagePainter(model = characterInfo.images.main),
+            contentDescription = characterInfo.getFullName(),
             modifier = Modifier
                 .size(64.dp)
                 .clip(RoundedCornerShape(8.dp))
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
-            text = characterResponse.name.first ?: "",
+            text = characterInfo.name.first,
             style = MaterialTheme.typography.body1
         )
     }

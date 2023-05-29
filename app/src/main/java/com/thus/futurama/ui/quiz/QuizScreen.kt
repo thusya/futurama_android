@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.thus.futurama.R
-import com.thus.futurama.data.model.QuizResponse
+import com.thus.futurama.domain.model.QuestionInfo
 import com.thus.futurama.ui.commonscreens.EmptyScreen
 import com.thus.futurama.ui.commonscreens.ErrorScreen
 import com.thus.futurama.ui.commonscreens.LoadingScreen
@@ -79,7 +79,7 @@ fun QuizScreen(navController: NavController, quizViewModel: QuizViewModel) {
 
 @Composable
 fun QuizScreenNormal(
-    questions: List<QuizResponse>,
+    questions: List<QuestionInfo>,
     onRestartQuiz: () -> Unit
 ) {
     var currentQuestionIndex by remember { mutableStateOf(0) }
@@ -164,13 +164,13 @@ fun ResultScreen(
 @Composable
 fun Preview() {
     val questions = listOf(
-        QuizResponse(
+        QuestionInfo(
             id = 1,
             question = "What is Fry's first name?",
             possibleAnswers = listOf("Fred", "Philip", "Will", "John"),
             correctAnswer = "Philip"
         ),
-        QuizResponse(
+        QuestionInfo(
             id = 2,
             question = "In 'Benders Big Score' what alien species scam the earth?",
             possibleAnswers = listOf(
@@ -182,7 +182,7 @@ fun Preview() {
             ),
             correctAnswer = "Nudest aliens"
         ),
-        QuizResponse(
+        QuestionInfo(
             id = 3,
             question = "What is Bender's middle and last name?",
             possibleAnswers = listOf(
