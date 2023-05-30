@@ -127,13 +127,13 @@ fun ButtonBottomBar(
 ) {
     Row(modifier = modifier) {
         Button(modifier = Modifier.weight(1.0f), onClick = onCharactersClicked) {
-            Text(text = stringResource(R.string.text_characters))
+            Text(text = stringResource(R.string.screen_name_characters))
         }
 
         Spacer(modifier = Modifier.width(MaterialTheme.spacing.medium))
 
         Button(modifier = Modifier.weight(1.0f), onClick = onQuizClicked) {
-            Text(text = stringResource(R.string.text_quiz))
+            Text(text = stringResource(R.string.screen_name_quiz))
         }
     }
 }

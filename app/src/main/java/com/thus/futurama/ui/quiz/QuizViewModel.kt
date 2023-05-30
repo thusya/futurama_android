@@ -21,20 +21,17 @@ class QuizViewModel(
 
     fun refresh() {
         quizState.value = QuizState.Loading
-
         viewModelScope.launch(ioDispatcher) {
             try {
-                val response = futuramaRepository.getQuiz()
-
-                if (response.isEmpty()) {
+                val questions = futuramaRepository.getRandomQuestions()
+                if (questions.isEmpty()) {
                     quizState.value = QuizState.Empty
                 } else {
-                    quizState.value = QuizState.Normal(response)
+                    quizState.value = QuizState.Normal(GameInfo(questions = questions))
                 }
             } catch (e: Exception) {
                 quizState.value = QuizState.Error(e)
             }
         }
     }
-
 }

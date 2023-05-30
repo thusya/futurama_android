@@ -46,7 +46,7 @@ fun CharactersScreen(navController: NavController, charactersViewModel: Characte
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.text_characters),
+                        text = stringResource(R.string.screen_name_characters),
                         style = MaterialTheme.typography.h6
                     )
                 },

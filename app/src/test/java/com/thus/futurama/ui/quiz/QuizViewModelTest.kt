@@ -35,20 +35,23 @@ class QuizViewModelTest {
                 correctAnswer = "Philip"
             )
         )
-        coEvery { futuramaRepository.getQuiz() } returns questionInfoList
+        coEvery { futuramaRepository.getRandomQuestions() } returns questionInfoList
 
         // When
         viewModel.refresh()
 
         // Then
-        assertEquals(QuizState.Normal(questionInfoList), viewModel.quizState.value)
+        assertEquals(
+            questionInfoList,
+            (viewModel.quizState.value as QuizState.Normal).gameInfo.questions
+        )
     }
 
     @Test
     fun `refresh should set quizState to Empty when question list is empty`() {
         // Given
         val emptyQuestionInfoList = emptyList<QuestionInfo>()
-        coEvery { futuramaRepository.getQuiz() } returns emptyQuestionInfoList
+        coEvery { futuramaRepository.getRandomQuestions() } returns emptyQuestionInfoList
 
         // When
         viewModel.refresh()
@@ -61,7 +64,7 @@ class QuizViewModelTest {
     fun `refresh should set quizState to Error when an exception occurs`() {
         // Given
         val exception = Exception("error message")
-        coEvery { futuramaRepository.getQuiz() } throws exception
+        coEvery { futuramaRepository.getRandomQuestions() } throws exception
 
         // When
         viewModel.refresh()

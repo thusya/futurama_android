@@ -3,14 +3,14 @@
     <string name="text_no_data_available">No data available</string>
     <string name="text_an_error_occurred">An error occurred</string>
     <string name="text_retry">Retry</string>
-    <string name="text_characters">Characters</string>
+    <string name="screen_name_characters">Characters</string>
     <string name="screen_name_character_detail">Character Detail</string>
-    <string name="text_quiz">Quiz</string>
+    <string name="screen_name_quiz">Quiz</string>
     <string name="text_years_aired">Years Aired</string>
     <string name="text_synopsis">Synopsis</string>
     <string name="text_creators">Creators</string>
 
-    <string name="quiz_score">Score: %d / %d</string>
+    <string name="quiz_score">Score: %d</string>
     <string name="quiz_result">Result %d</string>
     <string name="quiz_restart">Restart</string>
 
@@ -19,4 +19,5 @@
     <string name="text_species">Species: %s</string>
     <string name="text_home_planet">Home Planet: %s</string>
     <string name="text_occupation">Occupation: %s</string>
+    <string name="text_question_progress">Question: %s/%s</string>
 </resources>

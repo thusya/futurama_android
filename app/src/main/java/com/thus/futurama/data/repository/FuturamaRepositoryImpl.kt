@@ -8,8 +8,13 @@ import com.thus.futurama.domain.model.CharacterInfo
 import com.thus.futurama.domain.model.QuestionInfo
 import com.thus.futurama.domain.model.ShowInfo
 import com.thus.futurama.domain.repository.FuturamaRepository
+import java.util.ArrayList
+import java.util.Collections
 
 class FuturamaRepositoryImpl(private val apiService: ApiService) : FuturamaRepository {
+
+    private val questions = Collections.synchronizedList(ArrayList<QuestionInfo>())
+    private val maxItemCount = 20
 
     override suspend fun getShowInfo(): List<ShowInfo> {
         return apiService.getShowInfo()
@@ -21,10 +26,23 @@ class FuturamaRepositoryImpl(private val apiService: ApiService) : FuturamaRepos
             .map { it.toCharacterInfo() }
     }
 
-    override suspend fun getQuiz(): List<QuestionInfo> {
-        return apiService.getQuiz()
-            .map { it.toQuestionInfo() }
+    override suspend fun getRandomQuestions(): List<QuestionInfo> {
+        if (questions.isEmpty()) {
+            val response = apiService.getQuiz()
+            questions.clear()
+            questions.addAll(response.map {
+                it.toQuestionInfo()
+            })
+        }
+        return pickRandomQuestions(questions, maxItemCount)
     }
 
+    private fun pickRandomQuestions(
+        questionInfoList: List<QuestionInfo>,
+        count: Int
+    ): List<QuestionInfo> {
+        val randomizedList = questionInfoList.shuffled()
+        return randomizedList.subList(0, count.coerceAtMost(randomizedList.size))
+    }
 
 }

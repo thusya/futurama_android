@@ -5,6 +5,7 @@ import com.thus.futurama.data.model.ImageResponse
 import com.thus.futurama.data.model.NameResponse
 import com.thus.futurama.data.model.QuizResponse
 import com.thus.futurama.data.model.ShowResponse
+import com.thus.futurama.data.model.toQuestionInfo
 import com.thus.futurama.data.network.ApiService
 import com.thus.futurama.domain.model.CharacterImage
 import com.thus.futurama.domain.model.CharacterInfo
@@ -182,9 +183,49 @@ class FuturamaRepositoryImplTest {
 
         coEvery { apiService.getQuiz() } returns listOf(quizResponse1, quizResponse2)
 
-        //Act
-        val questionInfoList = futuramaRepository.getQuiz()
-        //Assert
-        assertEquals(questionInfoList, expectedQuestionInfoList)
+        // Act
+        val questionInfoList = futuramaRepository.getRandomQuestions()
+
+        // Assert
+        questionInfoList.forEach { questionInfo ->
+            assertEquals(true, expectedQuestionInfoList.contains(questionInfo))
+        }
+    }
+
+    @Test
+    fun `getRandomQuestions should return randomly picked QuestionInfo list`() = runBlocking {
+        // Given
+        val questionResponse = listOf(
+            QuizResponse(
+                id = 1,
+                question = "What is Fry's first name?",
+                possibleAnswers = listOf("Fred", "Philip", "Will", "John"),
+                correctAnswer = "Philip"
+            ),
+            QuizResponse(
+                id = 2,
+                question = "What is Fry's first name?",
+                possibleAnswers = listOf("Fred", "Philip", "Will", "John"),
+                correctAnswer = "Philip"
+            ), QuizResponse(
+                id = 3,
+                question = "What is Fry's first name?",
+                possibleAnswers = listOf("Fred", "Philip", "Will", "John"),
+                correctAnswer = "Philip"
+            )
+        )
+        val questions = questionResponse.map { it.toQuestionInfo() }
+        val count = 3
+        coEvery { apiService.getQuiz() } returns questionResponse
+
+        // When
+        val result = futuramaRepository.getRandomQuestions()
+
+        // Then
+        assertEquals(count.coerceAtMost(questions.size), result.size)
+        // Ensure that the picked questions are from the original list
+        result.forEach { questionInfo ->
+            assertEquals(true, questions.contains(questionInfo))
+        }
     }
 }

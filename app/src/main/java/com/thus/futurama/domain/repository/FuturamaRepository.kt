@@ -9,5 +9,5 @@ interface FuturamaRepository {
 
     suspend fun getCharacters(): List<CharacterInfo>
 
-    suspend fun getQuiz(): List<QuestionInfo>
+    suspend fun getRandomQuestions(): List<QuestionInfo>
 }
