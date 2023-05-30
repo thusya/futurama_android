@@ -1,5 +1,6 @@
 package com.thus.futurama.di
 
+import com.thus.futurama.BuildConfig
 import com.thus.futurama.domain.repository.FuturamaRepository
 import com.thus.futurama.data.network.ApiService
 import com.thus.futurama.data.repository.FuturamaRepositoryImpl
@@ -16,7 +17,7 @@ val appModules = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://api.sampleapis.com/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(OkHttpClient())
             .build()
