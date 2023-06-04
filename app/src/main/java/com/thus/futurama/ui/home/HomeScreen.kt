@@ -45,7 +45,6 @@ fun HomeScreenNormal(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(state)
             .padding(paddingValues)
     ) {
         Column(
