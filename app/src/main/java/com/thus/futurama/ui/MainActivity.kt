@@ -14,7 +14,6 @@ import com.thus.futurama.ui.home.HomeViewModel
 import com.thus.futurama.ui.navigation.NavigationScreen
 import com.thus.futurama.ui.quiz.QuizScreen
 import com.thus.futurama.ui.quiz.QuizViewModel
-import com.thus.futurama.ui.splash.SplashScreen
 import com.thus.futurama.ui.theme.FuturamaAppTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,11 +31,8 @@ class MainActivity : ComponentActivity() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = NavigationScreen.SPLASH_SCREEN.name
+                    startDestination = NavigationScreen.HOME_SCREEN.name
                 ) {
-                    composable(NavigationScreen.SPLASH_SCREEN.name) {
-                        SplashScreen(navController = navController)
-                    }
                     composable(NavigationScreen.HOME_SCREEN.name) {
                         HomeScreen(navController = navController, homeViewModel = homeViewModel)
                     }
